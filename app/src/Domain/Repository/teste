@@ -1,0 +1,2 @@
+INSERT INTO students (name, birth_date) values ('Arian Priolo', '1998-07-14'), ('Ana teste', '2000-03-23');
+INSERT INTO phones (area_code, number, student_id) VALUES ('14', '991030869', 1), ('14', '032375590', 1), ('14', '991187475', 2);

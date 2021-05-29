@@ -1,0 +1,31 @@
+version: '3.4'
+
+services: 
+    pdo:
+        ports: 
+            - 80:80
+        environment: 
+            - APACHE_DOCUMENT_ROOT=/var/www/html
+        build: 
+            context: .
+        volumes: 
+            - ./app:/var/www/html
+            - ./config/vhost.conf:/etc/apache2/sites-available/000-default.conf
+        networks:
+            - connect
+    mysql:
+        image: mysql
+        command: [ '--character-set-server=utf8', '--collation-server=utf8_general_ci', '--default-authentication-plugin=mysql_native_password' ]
+        environment:
+            MYSQL_DATABASE: mysqldb
+            MYSQL_USER: mysqluser
+            MYSQL_PASSWORD: mysqlpass
+            MYSQL_ROOT_PASSWORD: 1234
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql:/var/lib/mysql
+        networks:
+            - connect
+networks:
+    connect:
